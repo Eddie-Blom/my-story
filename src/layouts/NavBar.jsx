@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 import {
   Box,
   Drawer,
@@ -11,14 +12,17 @@ import {
   AppBar,
   IconButton,
   Toolbar,
+  Switch,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
   MoveToInbox as InboxIcon,
   Mail as MailIcon,
+  Brightness4 as Brightness4Icon,
+  Brightness7 as Brightness7Icon,
 } from "@mui/icons-material";
 
-const TemporaryDrawer = () => {
+const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
   const [state, setState] = useState({ left: false });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -95,6 +99,14 @@ const TemporaryDrawer = () => {
           >
             {list("left")}
           </Drawer>
+          <Box sx={{ flexGrow: 1 }} />
+          <IconButton color="inherit" onClick={toggleTheme}>
+            {currentTheme === "dark" ? (
+              <Brightness7Icon />
+            ) : (
+              <Brightness4Icon />
+            )}
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
