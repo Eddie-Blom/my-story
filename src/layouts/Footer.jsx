@@ -14,7 +14,13 @@ export default function SimpleBottomNavigation() {
         showLabels
         value={value}
         onChange={(event, newValue) => setValue(newValue)}
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: "transparent",
+        }}
         elevation={3}
       >
         <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />

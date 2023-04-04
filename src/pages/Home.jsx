@@ -1,13 +1,21 @@
-import { Button, Card } from "@mui/material";
+import { Button, Box, Grid } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div className="Home">
-      <Card>
-        <h2>Home</h2>
+    <Grid margin={2}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          minHeight: "50vh",
+        }}
+      >
+        <h2>Home Page</h2>
         <NavLink to="about" style={{ textDecoration: "none" }}>
-          <Button color="error" variant="contained">
+          <Button color="error" variant="contained" sx={{ fontWeight: "bold" }}>
             Go to about
           </Button>
         </NavLink>
@@ -16,7 +24,7 @@ export default function Home() {
           vitae maxime, eum fuga culpa nam, delectus similique porro tenetur
           quod dicta nesciunt eos iusto? Sequi velit minima vel fugit beatae?
         </p>
-      </Card>
-    </div>
+      </Box>
+    </Grid>
   );
 }

@@ -80,7 +80,7 @@ const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{ backgroundColor: "transparent" }}>
         <Toolbar>
           <IconButton
             size="large"

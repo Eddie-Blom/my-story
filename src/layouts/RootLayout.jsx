@@ -4,6 +4,24 @@ import CssBaseline from "@mui/material/CssBaseline";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
+import styled from "styled-components";
+
+const LightContainer = styled.div`
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+`;
+
+const DarkContainer = styled.div`
+  height: 100vh;
+  overflow-y: auto;
+  background-image: linear-gradient(
+    35.2deg,
+    rgba(0, 119, 182, 1) -18.7%,
+    rgba(8, 24, 68, 1) 54.3%
+  );
+`;
 
 export default function RootLayout() {
   const [themeMode, setThemeMode] = React.useState("dark");
@@ -12,32 +30,44 @@ export default function RootLayout() {
     setThemeMode(themeMode === "light" ? "dark" : "light");
   };
 
-  const theme = React.useMemo(
+  const lightTheme = React.useMemo(
     () =>
       createTheme({
         palette: {
-          mode: themeMode === "light" ? "light" : "dark",
+          mode: "light",
         },
       }),
-    [themeMode]
+    []
+  );
+
+  const darkTheme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: "dark",
+        },
+      }),
+    []
   );
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeMode === "light" ? lightTheme : darkTheme}>
       <CssBaseline />
-      <div className="root-layout">
-        <header>
-          <nav>
-            <NavBar toggleTheme={toggleTheme} />
-          </nav>
-        </header>
-        <main style={{ marginTop: "64px", marginBottom: "64px" }}>
-          <Outlet />
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </div>
+      <NavBar toggleTheme={toggleTheme} />
+      {themeMode === "light" ? (
+        <LightContainer>
+          <main style={{ marginTop: "64px", marginBottom: "64px" }}>
+            <Outlet />
+          </main>
+        </LightContainer>
+      ) : (
+        <DarkContainer>
+          <main style={{ marginTop: "64px", marginBottom: "64px" }}>
+            <Outlet />
+          </main>
+        </DarkContainer>
+      )}
+      <Footer />
     </ThemeProvider>
   );
 }
