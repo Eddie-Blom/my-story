@@ -1,0 +1,62 @@
+[
+  {
+      "id": "1",
+      "name": "Audi",
+      "Image": "/images/audi.jpg",
+      "price": 149000
+  },
+  {
+      "id": "2",
+      "name": "BMW",
+      "Image": "/images/bmw.jpg",
+      "price": 249000
+  },
+  {
+      "id": "3",
+      "name": "Mercedes-Benz",
+      "Image": "/images/mercedes.jpg",
+      "price": 199000
+  },
+  {
+      "id": "4",
+      "name": "SEAT",
+      "Image": "/images/seat.jpg",
+      "price": 199000
+  },
+  {
+      "id": "5",
+      "name": "Honda",
+      "Image": "/images/honda.jpg",
+      "price": 249000
+  },
+  {
+      "id": "6",
+      "name": "Mitsubishi",
+      "Image": "/images/mitsubishi.jpg",
+      "price": 99000
+  },
+  {
+      "id": "7",
+      "name": "KIA",
+      "Image": "/images/kia.jpg",
+      "price": 299000
+  },
+  {
+      "id": "8",
+      "name": "Porsche",
+      "Image": "/images/porsche.jpg",
+      "price": 499000
+  },
+  {
+      "id": "9",
+      "name": "Volkswagen",
+      "Image": "/images/volkswagen.jpg",
+      "price": 249000
+  },
+  {
+      "id": "10",
+      "name": "Volvo",
+      "Image": "/images/volvo.jpg",
+      "price": 399000
+  }
+]

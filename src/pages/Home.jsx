@@ -1,30 +1,53 @@
-import { Button, Box, Grid } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
-export default function Home() {
+function Home() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch('/Products.json')
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
+
   return (
-    <Grid margin={2}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          minHeight: "50vh",
-        }}
-      >
-        <h2>Home Page</h2>
-        <NavLink to="about" style={{ textDecoration: "none" }}>
-          <Button color="error" variant="contained" sx={{ fontWeight: "bold" }}>
-            Go to about
-          </Button>
-        </NavLink>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-          vitae maxime, eum fuga culpa nam, delectus similique porro tenetur
-          quod dicta nesciunt eos iusto? Sequi velit minima vel fugit beatae?
-        </p>
-      </Box>
-    </Grid>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        margin: '0 -16px',
+      }}
+    >
+      {products.map((product) => (
+        <Card
+          key={product.id}
+          style={{
+            width: 300,
+            margin: '8px',
+          }}
+        >
+          <CardMedia
+            component="img"
+            height="200px"
+            image={product.Image}
+            alt={product.name}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="h2">
+              {product.name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Pris: {product.price} Kr
+            </Typography>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   );
 }
+
+export default Home;

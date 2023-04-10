@@ -6,21 +6,28 @@ import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
-const LightContainer = styled.div`
+const Container = styled.div`
   height: 100vh;
-  overflow-y: auto;
-  background-color: #0093e9;
-  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
-`;
-
-const DarkContainer = styled.div`
-  height: 100vh;
-  overflow-y: auto;
-  background-image: linear-gradient(
-    35.2deg,
-    rgba(0, 119, 182, 1) -18.7%,
-    rgba(8, 24, 68, 1) 54.3%
-  );
+  overflow-y: scroll;
+  scrollbar-width: none; /* hide scrollbar on Firefox */
+  -ms-overflow-style: none; /* hide scrollbar on IE 11 */
+  &::-webkit-scrollbar {
+    width: 0px; /* hide scrollbar on Chrome, Safari, and Opera */
+    height: 0px;
+  }
+  ${({ themeMode }) =>
+    themeMode === "light"
+      ? `
+          background-color: #0093e9;
+          background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+        `
+      : `
+          background-image: linear-gradient(
+            35.2deg,
+            rgba(0, 119, 182, 1) -18.7%,
+            rgba(8, 24, 68, 1) 54.3%
+          );
+        `}
 `;
 
 export default function RootLayout() {
@@ -54,19 +61,11 @@ export default function RootLayout() {
     <ThemeProvider theme={themeMode === "light" ? lightTheme : darkTheme}>
       <CssBaseline />
       <NavBar toggleTheme={toggleTheme} />
-      {themeMode === "light" ? (
-        <LightContainer>
-          <main style={{ marginTop: "64px", marginBottom: "64px" }}>
-            <Outlet />
-          </main>
-        </LightContainer>
-      ) : (
-        <DarkContainer>
-          <main style={{ marginTop: "64px", marginBottom: "64px" }}>
-            <Outlet />
-          </main>
-        </DarkContainer>
-      )}
+      <Container themeMode={themeMode}>
+        <main style={{ marginTop: "64px", marginBottom: "64px" }}>
+          <Outlet />
+        </main>
+      </Container>
       <Footer />
     </ThemeProvider>
   );

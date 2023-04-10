@@ -4,7 +4,6 @@ import {
   Box,
   Drawer,
   List,
-  Divider,
   ListItem,
   ListItemButton,
   ListItemIcon,
@@ -12,15 +11,14 @@ import {
   AppBar,
   IconButton,
   Toolbar,
-  Switch,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
-  MoveToInbox as InboxIcon,
-  Mail as MailIcon,
+  Home as HomeIcon,
   Brightness4 as Brightness4Icon,
   Brightness7 as Brightness7Icon,
 } from "@mui/icons-material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
   const [state, setState] = useState({ left: false });
@@ -35,16 +33,8 @@ const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
   };
 
   const listItems = [
-    { text: "Inbox", icon: <InboxIcon /> },
-    { text: "Starred", icon: <MailIcon /> },
-    { text: "Send email", icon: <InboxIcon /> },
-    { text: "Drafts", icon: <MailIcon /> },
-  ];
-
-  const secondaryListItems = [
-    { text: "All mail", icon: <InboxIcon /> },
-    { text: "Trash", icon: <MailIcon /> },
-    { text: "Spam", icon: <InboxIcon /> },
+    { text: "Hem", icon: <HomeIcon />, to: "/" },
+    { text: "Varukorg", icon: <ShoppingCartIcon />, to: "/cart" },
   ];
 
   const list = (anchor) => (
@@ -55,20 +45,13 @@ const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {listItems.map(({ text, icon }, index) => (
+        {listItems.map(({ text, icon, to }, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {secondaryListItems.map(({ text, icon }, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              sx={{ width: "100%" }}
+              component={NavLink}
+              to={text === "Hem" ? "/" : "/cart"}
+            >
               <ListItemIcon>{icon}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -80,7 +63,9 @@ const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ backgroundColor: "transparent" }}>
+      <AppBar position="fixed" 
+      sx={{ backgroundColor: "transparent" }}
+      >
         <Toolbar>
           <IconButton
             size="large"
@@ -92,6 +77,7 @@ const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
           >
             <MenuIcon />
           </IconButton>
+          <h3>Car Shop</h3>
           <Drawer
             anchor="left"
             open={state["left"]}

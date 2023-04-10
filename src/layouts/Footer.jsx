@@ -1,32 +1,42 @@
-import React, { useState } from "react";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React from "react";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import {
+  Home as HomeIcon,
+  ShoppingCart as ShoppingCartIcon,
+} from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 export default function SimpleBottomNavigation() {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = React.useState(0);
 
   return (
-    <>
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => setValue(newValue)}
-        sx={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: "transparent",
-        }}
-        elevation={3}
-      >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-      </BottomNavigation>
-    </>
+    <BottomNavigation
+      value={value}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      showLabels
+      sx={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: "transparent",
+      }}
+      elevation={3}
+    >
+      <BottomNavigationAction
+        component={Link}
+        to="/"
+        label="Hem"
+        icon={<HomeIcon />}
+      />
+      <BottomNavigationAction
+        component={Link}
+        to="/cart"
+        label="Varukorg"
+        icon={<ShoppingCartIcon />}
+      />
+    </BottomNavigation>
   );
 }
