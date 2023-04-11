@@ -1,1 +1,1 @@
-## This is a project about me and my achievements ##
+## This is a react project using loocalstorage and api´s ##
