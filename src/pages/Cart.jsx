@@ -37,7 +37,7 @@ function Cart() {
         display: "flex",
         justifyContent: "center",
         flexWrap: "wrap",
-        margin: "0 -16px",
+        margin: "0 -8px",
       }}
     >
       {cartItems.length > 0 ? (
@@ -45,25 +45,45 @@ function Cart() {
           <Card
             key={item.id}
             style={{
-              width: 300,
+              width: 200,
+              height: 200,
               margin: "8px",
+              position: "relative",
+              boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+              transition: "0.3s",
+              borderRadius: "8px",
+              overflow: "hidden",
             }}
           >
             <CardMedia
               component="img"
-              height="200px"
+              height="120"
               image={getImageUrl(item.id)}
               alt={item.name}
+              style={{ objectFit: "cover" }}
             />
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="h2">
+            <CardContent style={{ paddingTop: "8px" }}>
+              <Typography
+                gutterBottom
+                variant="subtitle1"
+                component="h2"
+                style={{ fontWeight: "bold" }}
+              >
                 {item.name}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 Pris: {item.price} Kr
               </Typography>
-              <IconButton onClick={() => handleRemove(item)}>
-                <DeleteIcon />
+              <IconButton
+                onClick={() => handleRemove(item)}
+                style={{
+                  position: "absolute",
+                  padding: "4px",
+                  bottom: 5,
+                  right: 5,
+                }}
+              >
+                <DeleteIcon fontSize="small" />
               </IconButton>
             </CardContent>
           </Card>
