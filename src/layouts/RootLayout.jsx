@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useMemo } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import NavBar from "./NavBar";
@@ -9,10 +9,10 @@ import styled from "styled-components";
 const Container = styled.div`
   height: 100vh;
   overflow-y: scroll;
-  scrollbar-width: none; /* hide scrollbar on Firefox */
-  -ms-overflow-style: none; /* hide scrollbar on IE 11 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   &::-webkit-scrollbar {
-    width: 0px; /* hide scrollbar on Chrome, Safari, and Opera */
+    width: 0px;
     height: 0px;
   }
   ${({ themeMode }) =>
@@ -31,13 +31,13 @@ const Container = styled.div`
 `;
 
 export default function RootLayout() {
-  const [themeMode, setThemeMode] = React.useState("dark");
+  const [themeMode, setThemeMode] = useState("dark");
 
   const toggleTheme = () => {
     setThemeMode(themeMode === "light" ? "dark" : "light");
   };
 
-  const lightTheme = React.useMemo(
+  const lightTheme = useMemo(
     () =>
       createTheme({
         palette: {
@@ -47,7 +47,7 @@ export default function RootLayout() {
     []
   );
 
-  const darkTheme = React.useMemo(
+  const darkTheme = useMemo(
     () =>
       createTheme({
         palette: {
