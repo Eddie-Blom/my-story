@@ -20,17 +20,23 @@ import {
   Brightness7 as Brightness7Icon,
   ShoppingCart as ShoppingCartIcon,
 } from "@mui/icons-material";
+import React from "react";
 
-const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
-  const [state, setState] = useState({ left: false });
-  const [cartItemsCount, setCartItemsCount] = useState(0);
+interface DrawerProps {
+  toggleTheme: () => void;
+  currentTheme: string;
+}
+
+const TemporaryDrawer: React.FC<DrawerProps> = ({ toggleTheme, currentTheme }) => {
+  const [state, setState] = useState<{ [key: string]: boolean }>({ left: false });
+  const [cartItemsCount, setCartItemsCount] = useState<number>(0);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItemsCount(cartItems.length);
   }, []);
 
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -53,7 +59,7 @@ const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
     },
   ];
 
-  const renderListItem = ({ text, icon, to }) => (
+  const renderListItem = ({ text, icon, to }: { text: string, icon: React.ReactNode, to: string }) => (
     <ListItem key={text} disablePadding>
       <ListItemButton sx={{ width: "100%" }} component={NavLink} to={to}>
         <ListItemIcon>{icon}</ListItemIcon>
@@ -62,7 +68,7 @@ const TemporaryDrawer = ({ toggleTheme, currentTheme }) => {
     </ListItem>
   );
 
-  const renderList = (anchor) => (
+  const renderList = (anchor: string) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
